@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pahana Edu - Help & Guidance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .header-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(226, 232, 240, 0.3);
+        }
+
+        .section-title {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1e3a8a;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+            background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%);
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: left 0.5s;
+        }
+
+        .btn-secondary:hover::before {
+            left: 100%;
+        }
+
+        .decorative-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-icon {
+            position: absolute;
+            color: rgba(251, 191, 36, 0.1);
+            animation: floatIcon 12s infinite linear;
+        }
+
+        @keyframes floatIcon {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .icon-wrapper {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e3a8a;
+            font-size: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
+        }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: white;
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(251, 191, 36, 0.5);
+            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.1);
+        }
+
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border: 2px solid rgba(251, 191, 36, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.1);
+            color: #f59e0b;
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 4px;
+        }
+
+        .header-container {
+            padding: 2rem 1rem;
+        }
+
+        .nav-link {
+            position: relative;
+            color: white;
+            font-weight: 500;
+            padding-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #fbbf24;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: #fbbf24;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .feature-card {
+                padding: 16px;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .header-container {
+                padding: 1.5rem 0.75rem;
+            }
+
+            .nav-link {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen relative">
+    <!-- Decorative Background Elements -->
+    <div class="decorative-elements">
+        <i class="fas fa-book floating-icon text-6xl" style="left: 10%; animation-delay: -2s"></i>
+        <i class="fas fa-graduation-cap floating-icon text-4xl" style="left: 80%; animation-delay: -4s"></i>
+        <i class="fas fa-lightbulb floating-icon text-5xl" style="left: 20%; animation-delay: -6s"></i>
+        <i class="fas fa-pencil-alt floating-icon text-3xl" style="left: 70%; animation-delay: -1s"></i>
+        <i class="fas fa-bookmark floating-icon text-4xl" style="left: 90%; animation-delay: -8s"></i>
+    </div>
+
+    <!-- Header -->
+    <header class="header-gradient text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto header-container flex justify-between items-center">
+            <div class="logo-container">
+                <img src="images/pahana_logo2.png" alt="Pahana Edu Logo" class="w-16 h-16"/>
+                <div>
+                    <h1 class="text-3xl font-bold">Help Center</h1>
+                    <p class="text-base text-gray-200">Get the guidance you need</p>
+                </div>
+            </div>
+            <nav class="flex items-center space-x-8">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="#support" class="nav-link">Support</a>
+                <a href="#getting-started" class="nav-link">Guides</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-4 pt-12 pb-8">
+        <div class="text-center max-w-4xl mx-auto fade-in">
+            <h2 class="text-5xl font-bold text-white mb-6">
+                How can we <span class="section-title">help you today?</span>
+            </h2>
+            <p class="text-xl text-gray-200 mb-8 leading-relaxed">
+                Find answers, learn features, and get the most out of Pahana Edu with our comprehensive guidance system.
+            </p>
+            <!-- Search Box -->
+            <div class="relative max-w-2xl mx-auto mb-8">
+                <input type="text" 
+                       class="search-box pl-14" 
+                       placeholder="Search for help topics, features, or guides..."
+                       id="searchInput">
+                <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access Cards -->
+    <section class="container mx-auto px-4 mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="feature-card fade-in stagger-1" onclick="scrollToSection('getting-started')">
+                <div class="icon-wrapper">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-800 mb-2">Getting Started</h3>
+                <p class="text-gray-600 text-sm">Quick setup and first steps</p>
+                <div class="tag">Essential</div>
+            </div>
+            <div class="feature-card fade-in stagger-2" onclick="scrollToSection('customers')">
+                <div class="icon-wrapper">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-800 mb-2">Customer Management</h3>
+                <p class="text-gray-600 text-sm">Add, edit, and manage customers</p>
+                <div class="tag">Core Feature</div>
+            </div>
+            <div class="feature-card fade-in stagger-3" onclick="scrollToSection('items')">
+                <div class="icon-wrapper">
+                    <i class="fas fa-box"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-800 mb-2">Item Management</h3>
+                <p class="text-gray-600 text-sm">Manage your inventory efficiently</p>
+                <div class="tag">Core Feature</div>
+            </div>
+            <div class="feature-card fade-in stagger-4" onclick="scrollToSection('billing')">
+                <div class="icon-wrapper">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-800 mb-2">Billing System</h3>
+                <p class="text-gray-600 text-sm">Create and manage invoices</p>
+                <div class="tag">Advanced</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pb-16">
+        <div class="content-card p-8 max-w-5xl mx-auto">
+            <!-- Getting Started Section -->
+            <section id="getting-started" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-play text-white"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold section-title">Getting Started</h2>
+                </div>
+                <div class="highlight-box">
+                    <h4 class="font-semibold text-gray-800 mb-2">
+                        <i class="fas fa-lightbulb mr-2"></i>Quick Tip
+                    </h4>
+                    <p class="text-gray-700">Start with the Dashboard to access all main features. Your logo appears in the top navigation for easy brand recognition.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 mt-6">
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-amber-600 font-bold text-sm">1</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Access Dashboard</h4>
+                                <p class="text-gray-600 text-sm">Click "Go to Dashboard" from the welcome page to enter the main interface.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-amber-600 font-bold text-sm">2</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Navigate Sections</h4>
+                                <p class="text-gray-600 text-sm">Use the top navigation or dashboard cards to access Customers, Items, and Billing modules.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-amber-600 font-bold text-sm">3</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Safe Exit</h4>
+                                <p class="text-gray-600 text-sm">Click "Exit" in the navigation and close your browser to securely log out.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-amber-600 font-bold text-sm">4</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Get Support</h4>
+                                <p class="text-gray-600 text-sm">Access the Help Center from the dashboard for guidance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Customer Management Section -->
+            <section id="customers" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-users text-white"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold section-title">Customer Management</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-user-plus text-blue-600 mr-2"></i>
+                            <h4 class="font-semibold text-gray-800">Adding Customers</h4>
+                        </div>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• Fill customer name, address, account number, and telephone</li>
+                            <li>• Ensure all fields are valid</li>
+                            <li>• Click "Save Customer"</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gradient-to-br from-amber-50 to-yellow-50 p-6 rounded-xl border border-amber-200">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-edit text-amber-600 mr-2"></i>
+                            <h4 class="font-semibold text-gray-800">Updating Records</h4>
+                        </div>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• Select customer from table</li>
+                            <li>• Modify details in form</li>
+                            <li>• Click "Update Customer"</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-trash text-blue-600 mr-2"></i>
+                            <h4 class="font-semibold text-gray-800">Deleting Customers</h4>
+                        </div>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• Select customer from table</li>
+                            <li>• Click "Delete Customer"</li>
+                            <li>• Confirm deletion if prompted</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Item Management Section -->
+            <section id="items" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-box text-white"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold section-title">Item Management</h2>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl mb-6">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-4 flex items-center">
+                                <i class="fas fa-plus-circle text-amber-600 mr-2"></i>
+                                Adding Items
+                            </h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-check text-white text-xs"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-700">Enter item name and category</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-check text-white text-xs"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-700">Set unit price</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-check text-white text-xs"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-700">Specify stock quantity</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-check text-white text-xs"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-700">Click "Save Item"</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-4 flex items-center">
+                                <i class="fas fa-cogs text-blue-600 mr-2"></i>
+                                Managing Inventory
+                            </h4>
+                            <div class="space-y-3">
+                                <div class="bg-white p-3 rounded-lg border">
+                                    <strong class="text-xs text-amber-600">IMPORTANT:</strong>
+                                    <p class="text-sm text-gray-700 mt-1">Update stock quantities regularly to prevent overselling.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-edit text-blue-600 mr-2"></i>
+                            <h4 class="font-semibold text-gray-800">Updating Items</h4>
+                        </div>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• Select item from table</li>
+                            <li>• Modify name, category, price, or quantity</li>
+                            <li>• Click "Update Item"</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gradient-to-br from-amber-50 to-yellow-50 p-6 rounded-xl border border-amber-200">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-trash text-amber-600 mr-2"></i>
+                            <h4 class="font-semibold text-gray-800">Deleting Items</h4>
+                        </div>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• Select item from table</li>
+                            <li>• Click "Delete Item"</li>
+                            <li>• Confirm deletion if prompted</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Billing System Section -->
+            <section id="billing" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-file-invoice-dollar text-white"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold section-title">Billing System</h2>
+                </div>
+                <div class="highlight-box mb-6">
+                    <h4 class="font-semibold text-gray-800 mb-2">
+                        <i class="fas fa-info-circle mr-2"></i>Billing Workflow
+                    </h4>
+                    <p class="text-gray-700">Follow this step-by-step process to create accurate bills with automatic discounts.</p>
+                </div>
+                <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2">
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Select Customer</h4>
+                                    <p class="text-gray-600 text-sm">Choose a customer ID from the dropdown. A valid customer is required.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4 p-4 bg-amber-50 rounded-lg border-l-4 border-amber-500">
+                                <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Add Items</h4>
+                                    <p class="text-gray-600 text-sm">Select item names, enter quantities, and click "Add to Cart". Repeat for multiple items.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Review Discounts</h4>
+                                    <p class="text-gray-600 text-sm">Discounts are applied automatically: 5% (>2500), 10% (>5000), 15% (>10000).</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4 p-4 bg-amber-50 rounded-lg border-l-4 border-amber-500">
+                                <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold">4</div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Generate and Print</h4>
+                                    <p class="text-gray-600 text-sm">Click "Save Bill" to finalize, then "Print Bill" to view or print. Use "Cancel" to close the print preview.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-gray-800 text-white p-6 rounded-xl">
+                            <h4 class="font-semibold mb-4 flex items-center">
+                                <i class="fas fa-exclamation-triangle text-amber-400 mr-2"></i>
+                                Common Issues
+                            </h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="p-3 bg-gray-700 rounded-lg">
+                                    <strong class="text-red-400">Error:</strong> "Customer not found"
+                                    <p class="text-gray-300 mt-1">Solution: Verify customer ID exists</p>
+                                </div>
+                                <div class="p-3 bg-gray-700 rounded-lg">
+                                    <strong class="text-red-400">Error:</strong> "Insufficient quantity"
+                                    <p class="text-gray-300 mt-1">Solution: Check inventory levels</p>
+                                </div>
+                                <div class="p-3 bg-gray-700 rounded-lg">
+                                    <strong class="text-red-400">Error:</strong> "Invalid input"
+                                    <p class="text-gray-300 mt-1">Solution: Complete all required fields</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Troubleshooting Section -->
+            <section id="troubleshooting" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-tools text-white"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold section-title">Troubleshooting</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                            <h4 class="font-semibold text-blue-800 mb-3 flex items-center">
+                                <i class="fas fa-bug text-blue-600 mr-2"></i>
+                                Common Error Messages
+                            </h4>
+                            <div class="space-y-3">
+                                <div class="bg-white p-3 rounded-lg border border-blue-100">
+                                    <code class="text-red-600 text-sm">"Customer not found"</code>
+                                    <p class="text-gray-700 text-sm mt-1">Verify the customer ID exists in your database.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-blue-100">
+                                    <code class="text-red-600 text-sm">"Connection failed"</code>
+                                    <p class="text-gray-700 text-sm mt-1">Check if backend server is running on port 8080.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-blue-100">
+                                    <code class="text-red-600 text-sm">"Invalid input format"</code>
+                                    <p class="text-gray-700 text-sm mt-1">Ensure all required fields contain valid data.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-6">
+                            <h4 class="font-semibold text-amber-800 mb-3 flex items-center">
+                                <i class="fas fa-server text-amber-600 mr-2"></i>
+                                Technical Requirements
+                            </h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-check-circle text-amber-500"></i>
+                                    <span>Backend server: <code>http://localhost:8080/PahanaEduService/resources/</code></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-check-circle text-amber-500"></i>
+                                    <span>Recommended browsers: Chrome, Firefox, Edge</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-check-circle text-amber-500"></i>
+                                    <span>JavaScript must be enabled</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-check-circle text-amber-500"></i>
+                                    <span>Stable internet connection required</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                            <h4 class="font-semibold text-blue-800 mb-3 flex items-center">
+                                <i class="fas fa-lightbulb text-blue-600 mr-2"></i>
+                                Performance Tips
+                            </h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-arrow-right text-blue-500 mt-1"></i>
+                                    <span>Clear browser cache if experiencing loading issues</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-arrow-right text-blue-500 mt-1"></i>
+                                    <span>Avoid opening multiple tabs of the application</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-arrow-right text-blue-500 mt-1"></i>
+                                    <span>Log out properly to prevent session conflicts</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-6">
+                            <h4 class="font-semibold text-amber-800 mb-3 flex items-center">
+                                <i class="fas fa-shield-alt text-amber-600 mr-2"></i>
+                                Security Best Practices
+                            </h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-lock text-amber-500 mt-1"></i>
+                                    <span>Always log out when finished</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-lock text-amber-500 mt-1"></i>
+                                    <span>Don't share login credentials</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-lock text-amber-500 mt-1"></i>
+                                    <span>Use private browsing for shared computers</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-lock text-amber-500 mt-1"></i>
+                                    <span>Keep your browser updated</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Support Section -->
+            <section id="support" class="mb-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-headset text-white"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold section-title">Get Support</h2>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 border border-blue-200">
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-envelope text-white text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Email Support</h4>
+                            <p class="text-gray-600 text-sm mb-3">Get detailed help via email</p>
+                            <a href="mailto:support@pahanaedu.com" class="text-blue-600 hover:text-blue-700 font-medium">support@pahanaedu.com</a>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-phone text-white text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Phone Support</h4>
+                            <p class="text-gray-600 text-sm mb-3">Speak directly with our team</p>
+                            <a href="tel:+1-800-PAHANA-EDU" class="text-amber-600 hover:text-amber-700 font-medium">+1-800-PAHANA-EDU</a>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-comments text-white text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Live Chat</h4>
+                            <p class="text-gray-600 text-sm mb-3">Instant help when you need it</p>
+                            <button class="text-blue-600 hover:text-blue-700 font-medium" onclick="openChat()">Start Chat</button>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="font-semibold text-gray-800 mb-4">Support Hours</h4>
+                        <div class="inline-flex items-center space-x-4 text-sm text-gray-600 bg-white rounded-lg p-4">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-clock text-gray-500"></i>
+                                <span>Monday - Friday: 9 AM - 6 PM</span>
+                            </div>
+                            <div class="w-px h-4 bg-gray-300"></div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-globe text-gray-500"></i>
+                                <span>Response within 24 hours</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center pt-8 border-t border-gray-200">
+                <button class="btn-primary" onclick="goHome()">
+                    <i class="fas fa-home"></i>
+                    <span>Return to Home</span>
+                </button>
+                <button class="btn-primary" onclick="printGuide()">
+                    <i class="fas fa-download"></i>
+                    <span>Download Guide</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="header-gradient text-white py-6 relative z-10">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex items-center justify-center mb-4">
+                <img src="images/pahana_logo2.png" alt="Pahana Edu" class="w-8 h-8 mr-3"/>
+                <span class="text-white font-semibold">Pahana Edu</span>
+            </div>
+            <p class="text-gray-200 mb-4">&copy; 2025 Pahana Edu. All rights reserved.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="text-gray-200 hover:text-amber-400 transition-colors">
+                    <i class="fab fa-facebook text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-200 hover:text-amber-400 transition-colors">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-200 hover:text-amber-400 transition-colors">
+                    <i class="fab fa-linkedin text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-200 hover:text-amber-400 transition-colors">
+                    <i class="fab fa-youtube text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Smooth scrolling for navigation
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const sections = document.querySelectorAll('section[id]');
+                
+                if (searchTerm === '') {
+                    sections.forEach(section => {
+                        section.style.display = 'block';
+                    });
+                    return;
+                }
+
+                sections.forEach(section => {
+                    const content = section.textContent.toLowerCase();
+                    if (content.includes(searchTerm)) {
+                        section.style.display = 'block';
+                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Navigation functions
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        function openChat() {
+            alert('Live chat will be available soon! Please use email or phone support in the meantime.');
+        }
+
+        function printGuide() {
+            const printWindow = window.open('', '_blank');
+            const content = document.querySelector('main').innerHTML;
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Pahana Edu - User Guide</title>
+                        <style>
+                            body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: #333; }
+                            .feature-card, .content-card { border: 1px solid #ddd; padding: 20px; margin: 10px 0; }
+                            .section-title { color: #f59e0b; }
+                            .highlight-box { background: #f3f4f6; border-left: 4px solid #f59e0b; padding: 15px; }
+                            @media print { 
+                                .btn-primary, .btn-secondary, button { display: none; }
+                                body { print-color-adjust: exact; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Pahana Edu - User Guide</h1>
+                        ${content}
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            setupSearch();
+            
+            // Add hover effects for buttons and cards
+            document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    button.style.transform = 'translateY(-2px) scale(1.05)';
+                });
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            document.querySelectorAll('.feature-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-4px)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'k':
+                        e.preventDefault();
+                        document.getElementById('searchInput').focus();
+                        break;
+                    case 'h':
+                        e.preventDefault();
+                        goHome();
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

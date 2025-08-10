@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pahana Edu - Billing System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
+            min-height: 100vh;
+        }
+
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .section-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .header-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
+        }
+
+        .input-field, .select-field {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #fbbf24;
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+            transform: translateY(-1px);
+            background: #ffffff;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1e3a8a;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(107, 114, 128, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(107, 114, 128, 0.4);
+        }
+
+        .btn-select {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-select:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-remove {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-remove:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(239, 68, 68, 0.4);
+        }
+
+        .table-container {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: white;
+        }
+
+        .table-row:hover {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            transform: scale(1.01);
+            transition: all 0.2s ease;
+        }
+
+        .banner-container {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px;
+            z-index: 1000;
+        }
+
+        .banner {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            margin: 10px 0;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .banner.show {
+            transform: translateY(0);
+        }
+
+        .banner-success {
+            background: linear-gradient(135deg, #15803d, #16a34a);
+        }
+
+        .banner-error {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+        }
+
+        .banner-icon {
+            margin-right: 12px;
+            font-size: 24px;
+        }
+
+        .welcome-text {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .decorative-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-icon {
+            position: absolute;
+            color: rgba(251, 191, 36, 0.1);
+            animation: floatIcon 12s infinite linear;
+        }
+
+        @keyframes floatIcon {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        .logo-container {
+            background: linear-gradient(135deg, #1d2041 0%, #1d2041 100%);
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(29, 32, 65, 0.3);
+            animation: float 6s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .brand-title {
+            color: #1e3a8a;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1e3a8a;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(251, 191, 36, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 45px rgba(251, 191, 36, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="decorative-elements">
+        <i class="fas fa-book floating-icon text-6xl" style="left: 10%; animation-delay: -2s"></i>
+        <i class="fas fa-graduation-cap floating-icon text-4xl" style="left: 80%; animation-delay: -4s"></i>
+        <i class="fas fa-lightbulb floating-icon text-5xl" style="left: 20%; animation-delay: -6s"></i>
+        <i class="fas fa-pencil-alt floating-icon text-3xl" style="left: 70%; animation-delay: -1s"></i>
+        <i class="fas fa-bookmark floating-icon text-4xl" style="left: 90%; animation-delay: -8s"></i>
+        <i class="fas fa-star floating-icon text-3xl" style="left: 40%; animation-delay: -10s"></i>
+        <i class="fas fa-heart floating-icon text-4xl" style="left: 60%; animation-delay: -3s"></i>
+    </div>
+
+    <!-- Banner Notification Container -->
+    <div id="bannerContainer" class="banner-container"></div>
+
+    <!-- Header -->
+    <header class="header-gradient text-white py-6 shadow-2xl relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="logo-container">
+                        <img
+                            src="images/pahana_logo2.png"
+                            alt="Pahana Edu Logo"
+                            class="w-20 h-20 object-contain"
+                        />
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold">PAHANA EDU</h1>
+                        <p class="text-blue-200 font-medium">Billing System</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <div class="stats-card text-center">
+                        <div class="text-2xl font-bold" id="totalItems">0</div>
+                        <div class="text-sm font-medium">Selected Items</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 relative z-10">
+        <!-- Customer Selection -->
+        <section class="section-card rounded-3xl p-8 mb-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold welcome-text mb-2">
+                    <i class="fas fa-user mr-3"></i>Select Customer
+                </h2>
+                <p class="text-gray-600 font-medium">Choose a customer for billing</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-500 mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="mb-6">
+                <label for="customerSelect" class="block text-sm font-semibold text-gray-700 mb-2">
+                    <i class="fas fa-user-check mr-2 text-yellow-500"></i>Customer
+                </label>
+                <select id="customerSelect" class="select-field w-full" onchange="loadCustomerDetails()">
+                    <option value="">-- Select a Customer --</option>
+                </select>
+                <div id="customerDetails" class="mt-4 text-sm text-gray-600"></div>
+            </div>
+        </section>
+
+        <!-- Items Selection -->
+        <section class="section-card rounded-3xl p-8 mb-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold welcome-text mb-2">
+                    <i class="fas fa-boxes mr-3"></i>Select Items
+                </h2>
+                <p class="text-gray-600 font-medium">Add items to the bill</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-500 mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="table-container overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="table-header">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-book mr-2"></i>Item Name
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-tags mr-2"></i>Category
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-dollar-sign mr-2"></i>Price
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-boxes mr-2"></i>Stock
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-plus-circle mr-2"></i>Quantity
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-cogs mr-2"></i>Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemsTableBody" class="divide-y divide-gray-200"></tbody>
+                </table>
+            </div>
+            <button onclick="addItemRow()" class="btn-primary mt-6">
+                <i class="fas fa-sync-alt mr-2"></i>Refresh Items
+            </button>
+        </section>
+
+        <!-- Selected Items and Total -->
+        <section class="section-card rounded-3xl p-8 mb-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold welcome-text mb-2">
+                    <i class="fas fa-shopping-cart mr-3"></i>Selected Items
+                </h2>
+                <p class="text-gray-600 font-medium">Review your bill</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-500 mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="table-container overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="table-header">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-book mr-2"></i>Item Name
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-plus-circle mr-2"></i>Quantity
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-dollar-sign mr-2"></i>Price
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-money-bill mr-2"></i>Subtotal
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-cogs mr-2"></i>Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="selectedItemsTableBody" class="divide-y divide-gray-200"></tbody>
+                </table>
+            </div>
+            <div class="mt-6 space-y-2 text-right">
+                <p class="text-lg font-semibold text-gray-800">
+                    Subtotal: Rs. <span id="subtotalAmount">0.00</span>
+                </p>
+                <p class="text-lg font-semibold text-gray-800">
+                    Discount: Rs. <span id="discountAmount">0.00</span> (<span id="discountPercentage">0%</span>)
+                </p>
+                <p class="text-xl font-bold text-gray-900">
+                    Total Amount: Rs. <span id="totalAmount">0.00</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- Actions -->
+        <section class="section-card rounded-3xl p-8 mb-8">
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button onclick="submitBill()" class="btn-primary flex-1">
+                    <i class="fas fa-save mr-2"></i>Create Bill
+                </button>
+                <button onclick="showHelp()" class="btn-secondary flex-1">
+                    <i class="fas fa-question-circle mr-2"></i>Help
+                </button>
+                <button onclick="exitSystem()" class="btn-remove flex-1">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Exit
+                </button>
+            </div>
+        </section>
+
+        <!-- Help Section -->
+        <section id="helpSection" class="section-card rounded-3xl p-8 mb-8 hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold welcome-text mb-2">
+                    <i class="fas fa-info-circle mr-3"></i>Help
+                </h2>
+                <p class="text-gray-600 font-medium">Billing system instructions</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-500 mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="space-y-2 text-gray-600">
+                <p>1. Select a customer from the dropdown menu.</p>
+                <p>2. Add items by selecting from the table and specifying quantities.</p>
+                <p>3. Review the selected items, subtotal, discount, and total amount.</p>
+                <p>4. Discounts are applied automatically: 5% for bills over 2500, 10% for bills over 5000, 15% for bills over 10000.</p>
+                <p>5. Click "Create Bill" to save and print the bill.</p>
+                <p>6. Use "Refresh Items" to reload the item list if needed.</p>
+                <p>7. Use "Help" to view these instructions or "Exit" to return to the admin dashboard.</p>
+            </div>
+            <button onclick="hideHelp()" class="btn-secondary mt-6">
+                <i class="fas fa-times mr-2"></i>Close
+            </button>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="header-gradient text-white py-6 mt-12 relative z-10">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg font-medium">&copy; 2025 Pahana Edu. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <i class="fab fa-facebook text-blue-200 hover:text-yellow-400 cursor-pointer transition-colors text-xl"></i>
+                <i class="fab fa-twitter text-blue-200 hover:text-yellow-400 cursor-pointer transition-colors text-xl"></i>
+                <i class="fab fa-linkedin text-blue-200 hover:text-yellow-400 cursor-pointer transition-colors text-xl"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let selectedItems = [];
+
+        // Calculate discount based on subtotal
+        function calculateDiscount(subtotal) {
+            if (subtotal > 10000) {
+                return { percentage: 15, amount: subtotal * 0.15 };
+            } else if (subtotal > 5000) {
+                return { percentage: 10, amount: subtotal * 0.10 };
+            } else if (subtotal > 2500) {
+                return { percentage: 5, amount: subtotal * 0.05 };
+            }
+            return { percentage: 0, amount: 0 };
+        }
+
+        // Fetch customers and populate dropdown
+        async function loadCustomers() {
+            try {
+                const response = await fetch('http://localhost:8080/PahanaEduService/resources/customers');
+                const customers = await response.json();
+                const customerSelect = document.getElementById('customerSelect');
+                customers.forEach(customer => {
+                    const option = document.createElement('option');
+                    option.value = customer.customerId;
+                    option.textContent = `${customer.name} (${customer.accountNumber})`;
+                    customerSelect.appendChild(option);
+                });
+            } catch (error) {
+                showFeedback('Error loading customers: ' + error.message, 'feedback-error');
+            }
+        }
+
+        // Fetch customer details
+        async function loadCustomerDetails() {
+            const customerId = document.getElementById('customerSelect').value;
+            const customerDetails = document.getElementById('customerDetails');
+            if (!customerId) {
+                customerDetails.innerHTML = '';
+                return;
+            }
+            try {
+                const response = await fetch(`http://localhost:8080/PahanaEduService/resources/customers/${customerId}`);
+                const customer = await response.json();
+                customerDetails.innerHTML = `
+                    <p><i class="fas fa-user mr-2 text-yellow-500"></i><strong>Name:</strong> ${customer.name}</p>
+                    <p><i class="fas fa-credit-card mr-2 text-yellow-500"></i><strong>Account:</strong> ${customer.accountNumber}</p>
+                    <p><i class="fas fa-map-marker-alt mr-2 text-yellow-500"></i><strong>Address:</strong> ${customer.address}</p>
+                    <p><i class="fas fa-phone mr-2 text-yellow-500"></i><strong>Phone:</strong> ${customer.telephoneNumber}</p>
+                `;
+                customerDetails.dataset.name = customer.name;
+                customerDetails.dataset.account = customer.accountNumber;
+                customerDetails.dataset.address = customer.address;
+                customerDetails.dataset.phone = customer.telephoneNumber;
+            } catch (error) {
+                showFeedback('Error loading customer details: ' + error.message, 'feedback-error');
+            }
+        }
+
+        // Fetch items and populate table
+        async function loadItems() {
+            try {
+                const response = await fetch('http://localhost:8080/PahanaEduService/resources/items');
+                const items = await response.json();
+                const itemsTableBody = document.getElementById('itemsTableBody');
+                itemsTableBody.innerHTML = '';
+                items.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'table-row';
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">${item.category}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-green-600">Rs. ${item.price.toFixed(2)}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold ${item.stockQuantity > 0 ? 'text-green-600' : 'text-red-600'}">${item.stockQuantity}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <input type="number" min="1" max="${item.stockQuantity}" class="input-field w-full" data-item-id="${item.itemId}" data-price="${item.price}">
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <button onclick="selectItem(${item.itemId}, '${item.name}', ${item.price}, this)" class="btn-select">
+                                <i class="fas fa-plus mr-1"></i>Select
+                            </button>
+                        </td>
+                    `;
+                    itemsTableBody.appendChild(row);
+                });
+            } catch (error) {
+                showFeedback('Error loading items: ' + error.message, 'feedback-error');
+            }
+        }
+
+        // Add item to selected items with customer validation
+        function selectItem(itemId, itemName, price, button) {
+            const customerId = document.getElementById('customerSelect').value;
+            if (!customerId) {
+                showFeedback('Please select a customer first.', 'feedback-error');
+                return;
+            }
+
+            const row = button.closest('tr');
+            const quantityInput = row.querySelector('.input-field');
+            const quantity = parseInt(quantityInput.value);
+            const maxQuantity = parseInt(quantityInput.max);
+
+            if (!quantity || quantity <= 0) {
+                showFeedback('Please enter a valid quantity.', 'feedback-error');
+                return;
+            }
+            if (quantity > maxQuantity) {
+                showFeedback(`Quantity cannot exceed stock (${maxQuantity}).`, 'feedback-error');
+                return;
+            }
+
+            selectedItems.push({ itemId, itemName, quantity, price });
+            updateSelectedItemsTable();
+            quantityInput.value = '';
+            showFeedback('Item added to bill.', 'feedback-success');
+        }
+
+        // Update selected items table and total
+        function updateSelectedItemsTable() {
+            const selectedItemsTableBody = document.getElementById('selectedItemsTableBody');
+            selectedItemsTableBody.innerHTML = '';
+            let subtotal = 0;
+            selectedItems.forEach((item, index) => {
+                const itemSubtotal = item.quantity * item.price;
+                subtotal += itemSubtotal;
+                const row = document.createElement('tr');
+                row.className = 'table-row';
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.itemName}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">${item.quantity}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-green-600">Rs. ${item.price.toFixed(2)}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Rs. ${itemSubtotal.toFixed(2)}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <button onclick="removeItem(${index})" class="btn-remove">
+                            <i class="fas fa-trash mr-1"></i>Remove
+                        </td>
+                    `;
+                    selectedItemsTableBody.appendChild(row);
+                });
+                const discount = calculateDiscount(subtotal);
+                const total = subtotal - discount.amount;
+                document.getElementById('totalItems').textContent = selectedItems.length;
+                document.getElementById('subtotalAmount').textContent = subtotal.toFixed(2);
+                document.getElementById('discountAmount').textContent = discount.amount.toFixed(2);
+                document.getElementById('discountPercentage').textContent = `${discount.percentage}%`;
+                document.getElementById('totalAmount').textContent = total.toFixed(2);
+            }
+
+            // Remove item from selected items
+            function removeItem(index) {
+                selectedItems.splice(index, 1);
+                updateSelectedItemsTable();
+                showFeedback('Item removed from bill.', 'feedback-success');
+            }
+
+            // Refresh items table
+            function addItemRow() {
+                loadItems();
+                showFeedback('Items refreshed.', 'feedback-success');
+            }
+
+            // Generate print window content
+            function printBill(customer, bill, subtotal, discount, total) {
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>Bill Receipt - Pahana Edu</title>
+                        <style>
+                            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+                            body {
+                                font-family: 'Poppins', sans-serif;
+                                padding: 20px;
+                                background: #f8fafc;
+                            }
+                            .bill-container {
+                                max-width: 600px;
+                                margin: 0 auto;
+                                background: rgba(255, 255, 255, 0.98);
+                                backdrop-filter: blur(15px);
+                                border: 1px solid rgba(255, 255, 255, 0.3);
+                                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+                                padding: 20px;
+                                border-radius: 16px;
+                            }
+                            .header {
+                                text-align: center;
+                                margin-bottom: 20px;
+                                background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
+                                color: white;
+                                padding: 15px;
+                                border-radius: 12px;
+                            }
+                            .header img {
+                                width: 80px;
+                                height: 80px;
+                                object-fit: contain;
+                                margin-bottom: 10px;
+                            }
+                            .header h1 {
+                                margin: 0;
+                                font-size: 24px;
+                            }
+                            .customer-details, .bill-details {
+                                margin-bottom: 20px;
+                            }
+                            .customer-details p, .bill-details p {
+                                margin: 8px 0;
+                                color: #1e3a8a;
+                            }
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin-bottom: 20px;
+                            }
+                            th, td {
+                                border: 1px solid rgba(255, 255, 255, 0.3);
+                                padding: 12px;
+                                text-align: left;
+                            }
+                            th {
+                                background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+                                color: white;
+                                font-weight: 600;
+                            }
+                            td {
+                                background: rgba(255, 255, 255, 0.9);
+                                color: #1e3a8a;
+                            }
+                            .total {
+                                font-weight: bold;
+                                text-align: right;
+                                color: #1e3a8a;
+                                margin: 8px 0;
+                            }
+                            .print-btn {
+                                background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+                                color: #1e3a8a;
+                                border: none;
+                                border-radius: 12px;
+                                padding: 12px 24px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                                box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+                                margin: 10px;
+                            }
+                            .print-btn:hover {
+                                transform: translateY(-2px);
+                                box-shadow: 0 12px 30px rgba(251, 191, 36, 0.4);
+                            }
+                            .cancel-btn {
+                                background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+                                color: white;
+                                border: none;
+                                border-radius: 12px;
+                                padding: 12px 24px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                                box-shadow: 0 8px 20px rgba(107, 114, 128, 0.3);
+                                margin: 10px;
+                            }
+                            .cancel-btn:hover {
+                                transform: translateY(-2px);
+                                box-shadow: 0 12px 30px rgba(107, 114, 128, 0.4);
+                            }
+                            .button-container {
+                                text-align: center;
+                                margin: 20px 0;
+                            }
+                            @media print {
+                                .no-print { display: none; }
+                                .bill-container { box-shadow: none; border: none; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="bill-container">
+                            <div class="header">
+                                <img src="images/pahana_logo2.png" alt="Pahana Edu Logo">
+                                <h1>Pahana Edu Billing</h1>
+                                <p>Bill Date: ${new Date().toLocaleDateString()}</p>
+                            </div>
+                            <div class="customer-details">
+                                <h2 style="color: #1e3a8a; font-weight: 600;">Customer Details</h2>
+                                <p><i class="fas fa-user mr-2 text-yellow-500"></i><strong>Name:</strong> ${customer.name}</p>
+                                <p><i class="fas fa-credit-card mr-2 text-yellow-500"></i><strong>Account:</strong> ${customer.account}</p>
+                                <p><i class="fas fa-map-marker-alt mr-2 text-yellow-500"></i><strong>Address:</strong> ${customer.address}</p>
+                                <p><i class="fas fa-phone mr-2 text-yellow-500"></i><strong>Phone:</strong> ${customer.phone}</p>
+                            </div>
+                            <div class="bill-details">
+                                <h2 style="color: #1e3a8a; font-weight: 600;">Bill Details</h2>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Item Name</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${bill.map(item => `
+                                            <tr>
+                                                <td>${item.itemName}</td>
+                                                <td>${item.quantity}</td>
+                                                <td>Rs. ${item.price.toFixed(2)}</td>
+                                                <td>Rs. ${(item.quantity * item.price).toFixed(2)}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                                <p class="total">Subtotal: Rs. ${subtotal.toFixed(2)}</p>
+                                <p class="total">Discount (${discount.percentage}%): Rs. ${discount.amount.toFixed(2)}</p>
+                                <p class="total">Total Amount: Rs. ${total.toFixed(2)}</p>
+                            </div>
+                            <div class="button-container no-print">
+                                <button class="print-btn" onclick="window.print()"><i class="fas fa-print mr-2"></i>Print Bill</button>
+                                <button class="cancel-btn" onclick="window.close()"><i class="fas fa-times mr-2"></i>Cancel</button>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+            }
+
+            // Submit bill and print
+            async function submitBill() {
+                const customerId = document.getElementById('customerSelect').value;
+                const customerDetails = document.getElementById('customerDetails');
+                if (!customerId) {
+                    showFeedback('Please select a customer.', 'feedback-error');
+                    return;
+                }
+                if (selectedItems.length === 0) {
+                    showFeedback('Please add at least one item to the bill.', 'feedback-error');
+                    return;
+                }
+
+                const subtotal = parseFloat(document.getElementById('subtotalAmount').textContent);
+                const discount = calculateDiscount(subtotal);
+                const total = subtotal - discount.amount;
+
+                const bill = {
+                    customerId: parseInt(customerId),
+                    billDate: new Date().toISOString(),
+                    totalAmount: total,
+                    billItems: selectedItems.map(item => ({
+                        itemId: item.itemId,
+                        quantity: item.quantity,
+                        price: item.price
+                    }))
+                };
+
+                try {
+                    const response = await fetch('http://localhost:8080/PahanaEduService/resources/bills', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(bill)
+                    });
+                    if (response.ok) {
+                        const customer = {
+                            name: customerDetails.dataset.name,
+                            account: customerDetails.dataset.account,
+                            address: customerDetails.dataset.address,
+                            phone: customerDetails.dataset.phone
+                        };
+                        printBill(customer, selectedItems, subtotal, discount, total);
+                        showFeedback('Bill created successfully!', 'feedback-success');
+                        selectedItems = [];
+                        updateSelectedItemsTable();
+                        document.getElementById('customerSelect').value = '';
+                        document.getElementById('customerDetails').innerHTML = '';
+                        loadItems();
+                    } else {
+                        showFeedback('Error creating bill: ' + (await response.text()), 'feedback-error');
+                    }
+                } catch (error) {
+                    showFeedback('Error creating bill: ' + error.message, 'feedback-error');
+                }
+            }
+
+            // Show help section
+            function showHelp() {
+                document.getElementById('helpSection').classList.remove('hidden');
+            }
+
+            // Hide help section
+            function hideHelp() {
+                document.getElementById('helpSection').classList.add('hidden');
+            }
+
+            // Exit system
+            function exitSystem() {
+                window.location.href = 'adminHome.html';
+            }
+
+            // Show feedback message as banner
+            function showFeedback(message, className) {
+                const bannerContainer = document.getElementById('bannerContainer');
+                const banner = document.createElement('div');
+                banner.className = `banner ${className === 'feedback-success' ? 'banner-success' : 'banner-error'}`;
+                banner.innerHTML = `
+                    <i class="fas ${className === 'feedback-success' ? 'fa-check-circle' : 'fa-exclamation-circle'} banner-icon"></i>
+                    ${message}
+                `;
+                bannerContainer.appendChild(banner);
+
+                // Show banner with animation
+                setTimeout(() => {
+                    banner.classList.add('show');
+                }, 100);
+
+                // Remove banner after 3 seconds
+                setTimeout(() => {
+                    banner.classList.remove('show');
+                    setTimeout(() => {
+                        banner.remove();
+                    }, 300);
+                }, 3000);
+            }
+
+            // Initialize page
+            document.addEventListener('DOMContentLoaded', () => {
+                loadCustomers();
+                loadItems();
+                document.querySelectorAll('.input-field, .select-field').forEach((field) => {
+                    field.addEventListener('focus', function () {
+                        this.style.transform = 'scale(1.02)';
+                    });
+                    field.addEventListener('blur', function () {
+                        this.style.transform = 'scale(1)';
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

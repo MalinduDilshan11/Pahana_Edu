@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pahana Edu - Welcome</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-container {
+            background: linear-gradient(135deg, #1d2041 0%, #1d2041 100%);
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(29, 32, 65, 0.3);
+            animation: float 6s ease-in-out infinite;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .welcome-text {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .decorative-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-icon {
+            position: absolute;
+            color: rgba(251, 191, 36, 0.1);
+            animation: floatIcon 12s infinite linear;
+        }
+
+        @keyframes floatIcon {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1e3a8a;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-help {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-help:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+            background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%);
+        }
+
+        .btn-help::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: left 0.5s;
+        }
+
+        .btn-help:hover::before {
+            left: 100%;
+        }
+
+        .header-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Decorative Background Elements -->
+    <div class="decorative-elements">
+        <i class="fas fa-book floating-icon text-6xl" style="left: 10%; animation-delay: -2s"></i>
+        <i class="fas fa-graduation-cap floating-icon text-4xl" style="left: 80%; animation-delay: -4s"></i>
+        <i class="fas fa-lightbulb floating-icon text-5xl" style="left: 20%; animation-delay: -6s"></i>
+        <i class="fas fa-pencil-alt floating-icon text-3xl" style="left: 70%; animation-delay: -1s"></i>
+        <i class="fas fa-bookmark floating-icon text-4xl" style="left: 90%; animation-delay: -8s"></i>
+        <i class="fas fa-star floating-icon text-3xl" style="left: 40%; animation-delay: -10s"></i>
+        <i class="fas fa-heart floating-icon text-4xl" style="left: 60%; animation-delay: -3s"></i>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="logo-container fade-in">
+            <img
+                src="images/pahana_logo2.png"
+                alt="Pahana Edu Logo"
+                class="w-32 h-32 object-contain"
+            />
+        </div>
+        <h1 class="text-5xl md:text-6xl font-bold welcome-text mb-4 fade-in">Welcome to Pahana Edu</h1>
+        <p class="text-lg md:text-xl text-white font-medium mb-8 fade-in" style="animation-delay: 0.2s;">
+            Empowering Education with Seamless Management Solutions
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 fade-in" style="animation-delay: 0.4s;">
+            <a href="login.html" class="btn-primary">
+                <i class="fas fa-sign-in-alt mr-2"></i>Login
+            </a>
+            <a href="help.html" class="btn-help">
+                <i class="fas fa-question-circle mr-2"></i>Help
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="header-gradient text-white py-6 relative z-10">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg font-medium">&copy; 2025 Pahana Edu. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <i class="fab fa-facebook text-blue-200 hover:text-yellow-400 cursor-pointer transition-colors text-xl"></i>
+                <i class="fab fa-twitter text-blue-200 hover:text-yellow-400 cursor-pointer transition-colors text-xl"></i>
+                <i class="fab fa-linkedin text-blue-200 hover:text-yellow-400 cursor-pointer transition-colors text-xl"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add hover effects for buttons
+        document.querySelectorAll('.btn-primary, .btn-help').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.style.transform = 'translateY(-2px) scale(1.05)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

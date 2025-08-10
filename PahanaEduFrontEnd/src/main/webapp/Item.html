@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pahana Edu - Item Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
+            min-height: 100vh;
+        }
+
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .section-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .header-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
+        }
+
+        .input-field {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #fbbf24;
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+            transform: translateY(-1px);
+            background: #ffffff;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1e3a8a;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(107, 114, 128, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(107, 114, 128, 0.4);
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-edit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-delete:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+            background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%);
+        }
+
+        .btn-back::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: left 0.5s;
+        }
+
+        .btn-back:hover::before {
+            left: 100%;
+        }
+
+        .btn-logout {
+            background: linear-gradient(135deg, #fecaca 0%, #f87171 100%);
+            color: #7f1d1d;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-logout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(239, 68, 68, 0.4);
+            background: linear-gradient(135deg, #fee2e2 0%, #fca5a5 100%);
+        }
+
+        .btn-logout::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: left 0.5s;
+        }
+
+        .btn-logout:hover::before {
+            left: 100%;
+        }
+
+        .bottom-nav {
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .table-container {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: white;
+        }
+
+        .table-row:hover {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            transform: scale(1.01);
+            transition: all 0.2s ease;
+        }
+
+        .error-message {
+            display: none;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #fecaca, #fee2e2);
+            border-left: 4px solid #ef4444;
+            border-radius: 12px;
+            color: #dc2626;
+            font-weight: 500;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-text {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .decorative-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-icon {
+            position: absolute;
+            color: rgba(251, 191, 36, 0.1);
+            animation: floatIcon 12s infinite linear;
+        }
+
+        @keyframes floatIcon {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        .logo-container {
+            background: linear-gradient(135deg, #1d2041 0%, #1d2041 100%);
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(29, 32, 65, 0.3);
+            animation: float 6s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .brand-title {
+            color: #1e3a8a;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1e3a8a;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(251, 191, 36, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 45px rgba(251, 191, 36, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="decorative-elements">
+        <i class="fas fa-book floating-icon text-6xl" style="left: 10%; animation-delay: -2s"></i>
+        <i class="fas fa-graduation-cap floating-icon text-4xl" style="left: 80%; animation-delay: -4s"></i>
+        <i class="fas fa-lightbulb floating-icon text-5xl" style="left: 20%; animation-delay: -6s"></i>
+        <i class="fas fa-pencil-alt floating-icon text-3xl" style="left: 70%; animation-delay: -1s"></i>
+        <i class="fas fa-bookmark floating-icon text-4xl" style="left: 90%; animation-delay: -8s"></i>
+        <i class="fas fa-star floating-icon text-3xl" style="left: 40%; animation-delay: -10s"></i>
+        <i class="fas fa-heart floating-icon text-4xl" style="left: 60%; animation-delay: -3s"></i>
+    </div>
+
+    <!-- Header -->
+    <header class="header-gradient text-white py-6 shadow-2xl relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="logo-container">
+                        <img
+                            src="images/pahana_logo2.png"
+                            alt="Pahana Edu Logo"
+                            class="w-20 h-20 object-contain"
+                        />
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold">PAHANA EDU</h1>
+                        <p class="text-blue-200 font-medium">Item Management System</p>
+                    </div>
+                </div>
+                <div class="stats-card text-center">
+                    <div class="text-2xl font-bold" id="totalItems">0</div>
+                    <div class="text-sm font-medium">Total Items</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 relative z-10">
+        <!-- Form Section -->
+        <section class="section-card rounded-3xl p-8 mb-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold welcome-text mb-2">
+                    <i class="fas fa-plus-circle mr-3"></i>Manage Items
+                </h2>
+                <p class="text-gray-600 font-medium">Add new items or edit existing ones</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-500 mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <form id="itemForm" class="space-y-6">
+                <input type="hidden" id="itemId">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-book mr-2 text-yellow-500"></i>Book Name
+                        </label>
+                        <input type="text" id="name" name="name" class="input-field w-full" placeholder="Enter book name" required>
+                    </div>
+                    
+                    <div>
+                        <label for="category" class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-tags mr-2 text-yellow-500"></i>Category
+                        </label>
+                        <input type="text" id="category" name="category" class="input-field w-full" placeholder="Enter category" required>
+                    </div>
+                    
+                    <div>
+                        <label for="price" class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-dollar-sign mr-2 text-yellow-500"></i>Price (LKR)
+                        </label>
+                        <input type="number" id="price" name="price" step="0.01" min="0" class="input-field w-full" placeholder="0.00" required>
+                    </div>
+                    
+                    <div>
+                        <label for="stockQuantity" class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-boxes mr-2 text-yellow-500"></i>Stock Quantity
+                        </label>
+                        <input type="number" id="stockQuantity" name="stockQuantity" min="0" class="input-field w-full" placeholder="0" required>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <button type="submit" id="submitButton" class="btn-primary flex-1">
+                        <i class="fas fa-save mr-2"></i>Add Item
+                    </button>
+                    <button type="button" id="cancelButton" class="btn-secondary flex-1 hidden">
+                        <i class="fas fa-times mr-2"></i>Cancel
+                    </button>
+                </div>
+            </form>
+
+            <div id="errorMessage" class="error-message mt-4">
+                <i class="fas fa-exclamation-circle mr-2"></i>
+                <span id="errorText"></span>
+            </div>
+        </section>
+
+        <!-- Table Section -->
+        <section class="section-card rounded-3xl p-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold welcome-text mb-2">
+                    <i class="fas fa-list mr-3"></i>Item Inventory
+                </h2>
+                <p class="text-gray-600 font-medium">Manage your complete item collection</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-500 mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <div class="table-container overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="table-header">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-hashtag mr-2"></i>ID
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-book mr-2"></i>Book Name
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-tags mr-2"></i>Category
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-dollar-sign mr-2"></i>Price (LKR)
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-boxes mr-2"></i>Stock
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                <i class="fas fa-cogs mr-2"></i>Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemTableBody" class="divide-y divide-gray-200">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <div class="container mx-auto px-4 py-4 relative z-10">
+        <div class="bottom-nav flex justify-end space-x-4">
+            <a href="adminHome.html" class="btn-back">
+                <i class="fas fa-arrow-left mr-2"></i>Back
+            </a>
+            <a href="index.html" class="btn-logout">
+                <i class="fas fa-sign-out-alt mr-2"></i>Log Out
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="header-gradient text-white py-6 mt-12 relative z-10">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg font-medium">&copy; 2025 Pahana Edu. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <i class="fab fa-facebook text-blue-200 hover:text-yellow-400 cursor-pointer transition-colors text-xl"></i>
+                <i class="fab fa-twitter text-blue-200 hover:text-yellow-400 cursor-pointer transition-colors text-xl"></i>
+                <i class="fab fa-linkedin text-blue-200 hover:text-yellow-400 cursor-pointer transition-colors text-xl"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8080/PahanaEduService/resources/items';
+
+        // Fetch and display all items
+        async function fetchItems() {
+            try {
+                const response = await fetch(API_BASE_URL);
+                const items = await response.json();
+                const tableBody = document.getElementById('itemTableBody');
+                tableBody.innerHTML = '';
+                
+                // Update total items counter
+                document.getElementById('totalItems').textContent = items.length;
+                
+                items.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'table-row';
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">${item.itemId}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">${item.category}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-green-600">Rs. ${item.price.toFixed(2)}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold ${item.stockQuantity > 0 ? 'text-green-600' : 'text-red-600'}">${item.stockQuantity}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                            <button onclick="editItem(${item.itemId})" class="btn-edit">
+                                <i class="fas fa-edit mr-1"></i>Edit
+                            </button>
+                            <button onclick="deleteItem(${item.itemId})" class="btn-delete">
+                                <i class="fas fa-trash mr-1"></i>Delete
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                showError('Failed to fetch items: ' + error.message);
+            }
+        }
+
+        // Add or update item
+        document.getElementById('itemForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const itemId = document.getElementById('itemId').value;
+            const item = {
+                name: document.getElementById('name').value,
+                category: document.getElementById('category').value,
+                price: parseFloat(document.getElementById('price').value),
+                stockQuantity: parseInt(document.getElementById('stockQuantity').value)
+            };
+
+            try {
+                const url = itemId ? `${API_BASE_URL}/${itemId}` : API_BASE_URL;
+                const method = itemId ? 'PUT' : 'POST';
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(item)
+                });
+
+                if (response.ok) {
+                    resetForm();
+                    fetchItems();
+                } else {
+                    const errorData = await response.json();
+                    showError(errorData.message || 'Error saving item');
+                }
+            } catch (error) {
+                showError('Error saving item: ' + error.message);
+            }
+        });
+
+        // Edit item
+        async function editItem(id) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/${id}`);
+                if (response.ok) {
+                    const item = await response.json();
+                    document.getElementById('itemId').value = item.itemId;
+                    document.getElementById('name').value = item.name;
+                    document.getElementById('category').value = item.category;
+                    document.getElementById('price').value = item.price;
+                    document.getElementById('stockQuantity').value = item.stockQuantity;
+                    document.getElementById('submitButton').innerHTML = '<i class="fas fa-save mr-2"></i>Update Item';
+                    document.getElementById('cancelButton').classList.remove('hidden');
+                    
+                    // Scroll to form
+                    document.getElementById('itemForm').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    showError('Failed to fetch item details');
+                }
+            } catch (error) {
+                showError('Error fetching item: ' + error.message);
+            }
+        }
+
+        // Delete item
+        async function deleteItem(id) {
+            if (confirm('Are you sure you want to delete this item? This action cannot be undone.')) {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/${id}`, {
+                        method: 'DELETE'
+                    });
+                    if (response.ok) {
+                        fetchItems();
+                    } else {
+                        const errorData = await response.json();
+                        showError(errorData.message || 'Error deleting item');
+                    }
+                } catch (error) {
+                    showError('Error deleting item: ' + error.message);
+                }
+            }
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('itemForm').reset();
+            document.getElementById('itemId').value = '';
+            document.getElementById('submitButton').innerHTML = '<i class="fas fa-save mr-2"></i>Add Item';
+            document.getElementById('cancelButton').classList.add('hidden');
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        // Show error message
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = message;
+            errorMessage.style.display = 'block';
+            setTimeout(() => errorMessage.style.display = 'none', 5000);
+        }
+
+        // Cancel edit
+        document.getElementById('cancelButton').addEventListener('click', resetForm);
+
+        // Add interactive effects
+        document.querySelectorAll('.input-field').forEach((field) => {
+            field.addEventListener('focus', function () {
+                this.style.transform = 'scale(1.02)';
+            });
+
+            field.addEventListener('blur', function () {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add hover effects for buttons
+        document.querySelectorAll('.btn-primary, .btn-back, .btn-logout').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.style.transform = 'translateY(-2px)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Initial fetch
+        fetchItems();
+    </script>
+</body>
+</html>
