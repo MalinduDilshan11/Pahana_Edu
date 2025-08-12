@@ -1,4 +1,3 @@
-Utils\OrderDB.class
 com\mycompany\pahanaeduservice\resources\JakartaEE10Resource.class
 Utils\LocalDateTimeAdapter.class
 com\mycompany\pahanaeduservice\resources\BillService.class
@@ -8,13 +7,10 @@ com\mycompany\pahanaeduservice\resources\AdminService.class
 Utils\Bill.class
 Utils\Utils.class
 com\mycompany\pahanaeduservice\resources\CustomerService.class
-Utils\Order.class
-Utils\OrderItem.class
 Utils\BillDB.class
 com\mycompany\pahanaeduservice\JakartaRestConfiguration.class
 Utils\Bill$BillItem.class
 com\mycompany\pahanaeduservice\resources\ItemService.class
-com\mycompany\pahanaeduservice\resources\OrderService.class
 Utils\Admin.class
 Utils\Customer.class
 Utils\CustomerDB.class
