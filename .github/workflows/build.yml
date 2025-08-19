@@ -31,6 +31,6 @@ jobs:
           -Dversion=8.0.32 \
           -Dpackaging=jar
 
-    - name: Build with Maven
+    - name: Build with Maven (skip tests)
       working-directory: PahanaEduService/
       run: mvn clean install -Dmaven.test.skip=true
