@@ -22,12 +22,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Download and install MySQL Connector manually
+      - name: Download MySQL Connector/J 8.0.32
         run: |
-          wget https://repo1.maven.org/maven2/mysql/mysql-connector-j/8.0.32/mysql-connector-j-8.0.32.jar -O mysql-connector-j-8.0.32.jar
+          wget https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.0.32/mysql-connector-j-8.0.32.jar
           mvn install:install-file \
             -Dfile=mysql-connector-j-8.0.32.jar \
-            -DgroupId=mysql \
+            -DgroupId=com.mysql \
             -DartifactId=mysql-connector-j \
             -Dversion=8.0.32 \
             -Dpackaging=jar
