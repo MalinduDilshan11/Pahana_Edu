@@ -20,10 +20,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    # Workaround: install mysql-connector-java but under the artifactId "mysql-connector-j"
+    # Workaround: provide mysql:mysql-connector-j:8.0.32 manually
     - name: Install MySQL Connector workaround
       run: |
-        curl -L -o mysql-connector-java-8.0.32.jar https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.32/mysql-connector-java-8.0.32.jar
+        curl -L -o mysql-connector-java-8.0.32.jar \
+          https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.32/mysql-connector-java-8.0.32.jar
         mvn install:install-file \
           -Dfile=mysql-connector-java-8.0.32.jar \
           -DgroupId=mysql \
@@ -33,10 +34,4 @@ jobs:
 
     - name: Build with Maven (skip tests)
       working-directory: PahanaEduService/
-      run: |
-        if mvn clean install -Dmaven.test.skip=true; then
-          echo "✅ PahanaEduService build completed successfully!"
-        else
-          echo "❌ Build failed! Please check the logs above."
-          exit 1
-        fi
+      run: mvn clean install -Dmaven.test.skip=true
