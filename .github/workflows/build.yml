@@ -34,3 +34,6 @@ jobs:
     - name: Build with Maven (skip tests)
       working-directory: PahanaEduService/
       run: mvn clean install -Dmaven.test.skip=true
+
+    - name: ✅ Build Confirmation
+      run: echo "✅ PahanaEduService build completed successfully!"
