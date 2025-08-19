@@ -13,25 +13,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # 2. Set up JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Download MySQL Connector/J 8.0.32
+      # 3. Download MySQL Connector/J 8.0.32
+      - name: Download MySQL Connector/J
         run: |
-          wget https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.0.32/mysql-connector-j-8.0.32.jar
+          wget https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.0.32/mysql-connector-j-8.0.32.jar -O mysql-connector-j-8.0.32.jar
+
+      # 4. Install it in Maven local repository under the expected coordinates
+      - name: Install MySQL Connector/J to local Maven
+        run: |
           mvn install:install-file \
             -Dfile=mysql-connector-j-8.0.32.jar \
-            -DgroupId=com.mysql \
+            -DgroupId=mysql \
             -DartifactId=mysql-connector-j \
             -Dversion=8.0.32 \
             -Dpackaging=jar
 
+      # 5. Build the project, skipping tests
       - name: Build with Maven (skip tests)
         working-directory: PahanaEduService/
         run: mvn clean install -Dmaven.test.skip=true
