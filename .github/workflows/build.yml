@@ -1,37 +1,27 @@
-name: PahanaEduService Maven build
+name: PahanaEduService Maven Build
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
-    # Workaround: provide mysql:mysql-connector-j:8.0.32 manually
-    - name: Install MySQL Connector workaround
-      run: |
-        curl -L -o mysql-connector-java-8.0.32.jar \
-          https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.32/mysql-connector-java-8.0.32.jar
-        mvn install:install-file \
-          -Dfile=mysql-connector-java-8.0.32.jar \
-          -DgroupId=mysql \
-          -DartifactId=mysql-connector-j \
-          -Dversion=8.0.32 \
-          -Dpackaging=jar
-
-    - name: Build with Maven (skip tests)
-      working-directory: PahanaEduService/
-      run: mvn clean install -Dmaven.test.skip=true
+      - name: Build with Maven (PahanaEduService - skip tests)
+        working-directory: PahanaEduService/
+        run: mvn clean install -Dmaven.test.skip=true
