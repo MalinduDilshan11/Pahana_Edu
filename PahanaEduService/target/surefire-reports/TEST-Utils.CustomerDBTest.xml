@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="Utils.CustomerDBTest" time="0.15" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="Utils.CustomerDBTest" time="0.148" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="netbeans.deploy" value="true"/>
     <property name="java.specification.version" value="21"/>
@@ -17,7 +17,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\Malindu Dilshan\AppData\Local\Temp\surefire4614441069726025310\surefirebooter-20250819084905361_3.jar C:\Users\Malindu Dilshan\AppData\Local\Temp\surefire4614441069726025310 2025-08-19T08-49-05_219-jvmRun1 surefire-20250819084905361_1tmp surefire_0-20250819084905361_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Malindu Dilshan\AppData\Local\Temp\surefire9868899407803780055\surefirebooter-20250819211938560_3.jar C:\Users\Malindu Dilshan\AppData\Local\Temp\surefire9868899407803780055 2025-08-19T21-19-38_401-jvmRun1 surefire-20250819211938560_1tmp surefire_0-20250819211938560_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="exec.vmArgs" value=""/>
     <property name="surefire.test.class.path" value="C:\Users\Malindu Dilshan\Documents\NetBeansProjects\pahana\PahanaEduService\target\test-classes;C:\Users\Malindu Dilshan\Documents\NetBeansProjects\pahana\PahanaEduService\target\classes;C:\Users\Malindu Dilshan\.m2\repository\jakarta\platform\jakarta.jakartaee-api\10.0.0\jakarta.jakartaee-api-10.0.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\platform\jakarta.jakartaee-web-api\10.0.0\jakarta.jakartaee-web-api-10.0.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\servlet\jsp\jakarta.servlet.jsp-api\3.1.0\jakarta.servlet.jsp-api-3.1.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\el\jakarta.el-api\5.0.1\jakarta.el-api-5.0.1.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\servlet\jsp\jstl\jakarta.servlet.jsp.jstl-api\3.0.0\jakarta.servlet.jsp.jstl-api-3.0.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\faces\jakarta.faces-api\4.0.1\jakarta.faces-api-4.0.1.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\ws\rs\jakarta.ws.rs-api\3.1.0\jakarta.ws.rs-api-3.1.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\websocket\jakarta.websocket-api\2.1.0\jakarta.websocket-api-2.1.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\websocket\jakarta.websocket-client-api\2.1.0\jakarta.websocket-client-api-2.1.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\json\jakarta.json-api\2.1.0\jakarta.json-api-2.1.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\json\bind\jakarta.json.bind-api\3.0.0\jakarta.json.bind-api-3.0.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\ejb\jakarta.ejb-api\4.0.1\jakarta.ejb-api-4.0.1.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\interceptor\jakarta.interceptor-api\2.1.0\jakarta.interceptor-api-2.1.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\enterprise\jakarta.enterprise.cdi-api\4.0.1\jakarta.enterprise.cdi-api-4.0.1.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\enterprise\jakarta.enterprise.lang-model\4.0.1\jakarta.enterprise.lang-model-4.0.1.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\authentication\jakarta.authentication-api\3.0.0\jakarta.authentication-api-3.0.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\security\enterprise\jakarta.security.enterprise-api\3.0.0\jakarta.security.enterprise-api-3.0.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\jms\jakarta.jms-api\3.1.0\jakarta.jms-api-3.1.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.0\jakarta.activation-api-2.1.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\mail\jakarta.mail-api\2.1.0\jakarta.mail-api-2.1.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\resource\jakarta.resource-api\2.1.0\jakarta.resource-api-2.1.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\authorization\jakarta.authorization-api\2.1.0\jakarta.authorization-api-2.1.0.jar;C:\Users\Malindu Dilshan\.m2\repository\jakarta\batch\jakarta.batch-api\2.1.1\jakarta.batch-api-2.1.1.jar;C:\Users\Malindu Dilshan\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\Malindu Dilshan\.m2\repository\mysql\mysql-connector-j\8.0.32\mysql-connector-j-8.0.32.jar;C:\Users\Malindu Dilshan\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.1\junit-jupiter-api-5.10.1.jar;C:\Users\Malindu Dilshan\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Malindu Dilshan\.m2\repository\org\junit\platform\junit-platform-commons\1.10.1\junit-platform-commons-1.10.1.jar;C:\Users\Malindu Dilshan\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;"/>
@@ -33,7 +33,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Malindu Dilshan\AppData\Local\Temp\surefire4614441069726025310\surefirebooter-20250819084905361_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Malindu Dilshan\AppData\Local\Temp\surefire9868899407803780055\surefirebooter-20250819211938560_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.2+13-LTS-58"/>
@@ -62,47 +62,47 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testGetCustomers" classname="Utils.CustomerDBTest" time="0.008">
+  <testcase name="testGetCustomers" classname="Utils.CustomerDBTest" time="0.01">
     <system-out><![CDATA[getCustomers
 ]]></system-out>
   </testcase>
-  <testcase name="testAddCustomer" classname="Utils.CustomerDBTest" time="0.028">
+  <testcase name="testAddCustomer" classname="Utils.CustomerDBTest" time="0.032">
     <system-out><![CDATA[addCustomer
 Customer added: Test User (Rows affected: 1)
 Customer found by account number: Test User
-Customer deleted with ID: 33 (Rows affected: 1)
+Customer deleted with ID: 42 (Rows affected: 1)
 ]]></system-out>
   </testcase>
-  <testcase name="testUpdateCustomer" classname="Utils.CustomerDBTest" time="0.04">
+  <testcase name="testUpdateCustomer" classname="Utils.CustomerDBTest" time="0.036">
     <system-out><![CDATA[updateCustomer
 Customer added: Old Name (Rows affected: 1)
 Customer found by account number: Old Name
 Customer updated: New Name (Rows affected: 1)
 Customer found: New Name
-Customer deleted with ID: 34 (Rows affected: 1)
+Customer deleted with ID: 43 (Rows affected: 1)
 ]]></system-out>
   </testcase>
-  <testcase name="testGetCustomerByAccountNumber" classname="Utils.CustomerDBTest" time="0.017">
+  <testcase name="testGetCustomerByAccountNumber" classname="Utils.CustomerDBTest" time="0.021">
     <system-out><![CDATA[getCustomerByAccountNumber
 Customer added: Test User (Rows affected: 1)
 Customer found by account number: Test User
-Customer deleted with ID: 35 (Rows affected: 1)
+Customer deleted with ID: 44 (Rows affected: 1)
 ]]></system-out>
   </testcase>
-  <testcase name="testDeleteCustomer" classname="Utils.CustomerDBTest" time="0.021">
+  <testcase name="testDeleteCustomer" classname="Utils.CustomerDBTest" time="0.025">
     <system-out><![CDATA[deleteCustomer
 Customer added: Delete Me (Rows affected: 1)
 Customer found by account number: Delete Me
-Customer deleted with ID: 36 (Rows affected: 1)
-No customer found for ID: 36
+Customer deleted with ID: 45 (Rows affected: 1)
+No customer found for ID: 45
 ]]></system-out>
   </testcase>
-  <testcase name="testGetCustomer" classname="Utils.CustomerDBTest" time="0.03">
+  <testcase name="testGetCustomer" classname="Utils.CustomerDBTest" time="0.017">
     <system-out><![CDATA[getCustomer
 Customer added: Test User (Rows affected: 1)
 Customer found by account number: Test User
 Customer found: Test User
-Customer deleted with ID: 37 (Rows affected: 1)
+Customer deleted with ID: 46 (Rows affected: 1)
 ]]></system-out>
   </testcase>
 </testsuite>
